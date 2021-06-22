@@ -1,0 +1,12 @@
+[package]
+name = "kendall"
+version = "0.1.0"
+authors = ["doraneko94 <shuntaro94@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+avlsort = { path = "../avlsort" }
+chrono = "0.4.19"
+rand = "0.8.4"
