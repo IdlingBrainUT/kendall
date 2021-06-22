@@ -67,18 +67,18 @@ pub fn ndtau<T: TreeElem>(a: &[T], b: &[T]) -> Result<f64, ()> {
     Ok(4.0 * cf / (nf * (nf - 1.0)) - 1.0)
 }
 
-pub fn ndtau_core<T: TreeElem>(a: &[T], b: &[T]) -> Result<(usize, usize), ()> {
-    let n = a.len();
-    if n != b.len() {
+pub fn ndtau_core<T: TreeElem>(a: &[T], b: &[T]) -> Result<(i128, i128), ()> {
+    let n = a.len() as i128;
+    if n != b.len() as i128 {
         return Err(());
     }
 
     let mut ab = a.iter().zip(b.iter()).map(|(&ai, &bi)| (ai, bi)).collect::<Vec<(T, T)>>();
     ab.sort_by(|s, t| ord_tup(s, t));
     let mut avl = AvlTree::new();
-    let mut c = 0;
+    let mut c = 0i128;
     for &(_, bi) in ab.iter() {
-        c += avl.push(bi).0;
+        c += avl.push(bi).0 as i128;
     }
     Ok((n, c))
 }
@@ -303,7 +303,15 @@ pub fn nzndtau_core<T: TreeElem>(a: &[T], b: &[T]) -> Result<(i128, i128, i128, 
         }
     }
 
-    let (mut c, mut d, mut ex, mut ey) = sdtau_core(&x, &y)?;
+    let (n, mut c) = ndtau_core(&x, &y)?;
+    let mut d = if n <= 1 {
+        panic!()
+    } else if n % 2 == 0 {
+        n / 2 * (n - 1) - c
+    } else {
+        (n - 1) / 2 * n - c
+    };
+    let (mut ex, mut ey) = (0i128, 0i128);
 
     x.sort();
     let x_len = x.len();
