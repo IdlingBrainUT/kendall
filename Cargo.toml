@@ -7,7 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-avlsort = { path = "../avlsort" }
+avlsort = "0.1"
 chrono = "0.4.19"
 rand = "0.8.4"
 statrs = "0.14.0"
