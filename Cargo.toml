@@ -9,5 +9,5 @@ edition = "2018"
 [dependencies]
 avlsort = "0.1"
 chrono = "0.4.19"
-rand = "0.8.4"
+rand = "0.8.3"
 statrs = "0.14.0"
