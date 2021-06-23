@@ -10,3 +10,4 @@ edition = "2018"
 avlsort = { path = "../avlsort" }
 chrono = "0.4.19"
 rand = "0.8.4"
+statrs = "0.14.0"
