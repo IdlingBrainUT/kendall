@@ -302,15 +302,16 @@ pub fn nzndtau_core<T: TreeElem>(a: &[T], b: &[T]) -> Result<(i128, i128, i128, 
             return Err(());
         }
     }
-
-    let (n, mut c) = ndtau_core(&x, &y)?;
-    let mut d = if n <= 1 {
-        panic!()
-    } else if n % 2 == 0 {
-        n / 2 * (n - 1) - c
-    } else {
-        (n - 1) / 2 * n - c
-    };
+    let (mut c, mut d) = (0, 0);
+    if x.len() >= 2 {
+        let (ni, ci) = ndtau_core(&x, &y)?;
+        c += ci;
+        d += if ni % 2 == 0 {
+            ni / 2 * (ni - 1) - ci
+        } else {
+            (ni - 1) / 2 * ni - ci
+        };
+    }
     let (mut ex, mut ey) = (0i128, 0i128);
 
     x.sort();
